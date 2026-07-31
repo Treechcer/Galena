@@ -3,14 +3,15 @@
         "type" : "never"
     },
     "initRun" : [
-        "sudo apt update && sudo apt upgrade",
-        "sudo apt install -y samba samba-common-bin smbclient cifs-utils",
-        "sudo mkdir -p $3",
-        "sudo bash -c \"echo -e '[$1]\ncomment = $2\npublic = yes\nwriteable = yes\nbrowsable = yes\npath = $3\nvalid users = $4' >> /etc/samba/smb.conf\"",
+        "sudo apt update && sudo apt upgrade > /dev/null",
+        "sudo apt install -y samba samba-common-bin smbclient cifs-utils > /dev/null",
+        "sudo mkdir -p $3 > /dev/null",
+        "sudo bash -c \"echo -e '[$1]\ncomment = $2\npublic = yes\nwriteable = yes\nbrowsable = yes\npath = $3\nvalid users = $4' >> /etc/samba/smb.conf\" > /dev/null",
+        "sudo useradd -m $4",
         "sudo smbpasswd -a $4",
-        "sudo chmod -R 777 $3",
-        "sudo service smbd restart",
-        "sudo systemctl enable --now smbd"
+        "sudo chmod -R 777 $3 > /dev/null",
+        "sudo service smbd restart > /dev/null",
+        "sudo systemctl enable --now smbd > /dev/null"
     ],
     "data" : {
         "initRun" : {
