@@ -37,4 +37,4 @@ sudo apt update && sudo apt upgrade
 echo "Downlaoding dependencies (might ask for some configuration, not fully automatic!)"
 sudo apt install -y python3 python3-pip
 
-echo "Next time you log in and out Galena should start working!"
+echo "Next time you log in and out 'Galena' should start working!"

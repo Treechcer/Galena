@@ -1,0 +1,49 @@
+{
+    "run" : {
+        "type" : "never"
+    },
+    "initRun" : [
+        "sudo apt update && sudo apt upgrade",
+        "sudo apt install -y samba samba-common-bin smbclient cifs-utils",
+        "sudo mkdir -p $3",
+        "sudo bash -c \"echo -e '[$1]\ncomment = $2\npublic = yes\nwriteable = yes\nbrowsable = yes\npath = $3\nvalid users = $4' >> /etc/samba/smb.conf\"",
+        "sudo smbpasswd -a $4",
+        "sudo chmod -R 777 $3",
+        "sudo service smbd restart",
+        "sudo systemctl enable --now smbd"
+    ],
+    "data" : {
+        "initRun" : {
+            "arguments" : [
+                {
+                    "name" : "name",
+                    "type" : "string",
+                    "comment" : "Name of SMB folder in file sharing apps",
+                    "isNecesarry" : true,
+                    "defaultValue" : ""
+                },
+                {
+                    "name" : "comment",
+                    "type" : "string",
+                    "comment" : "String associated with share",
+                    "isNecesarry" : true,
+                    "defaultValue" : ""
+                },
+                {
+                    "name" : "comment",
+                    "type" : "string",
+                    "comment" : "String associated with share",
+                    "isNecesarry" : false,
+                    "defaultValue" : "/mnt/NAS"
+                },
+                {
+                    "name" : "username",
+                    "type" : "string",
+                    "comment" : "This will be the username you'll use to log into your NAS",
+                    "isNecesarry" : false,
+                    "defaultValue" : "Galena"
+                }
+            ]
+        }
+    }
+}
