@@ -1,0 +1,13 @@
+{
+    "run" : {
+        "type" : "never"
+    },
+    "initRun" : [
+        "sudo apt update > /dev/null && sudo apt upgrade > /dev/null",
+        "sudo apt install -y cockpit > /dev/null",
+        "systemctl status cockpit.socket"
+    ],
+    "data" : {
+
+    }
+}

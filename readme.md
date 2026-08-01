@@ -13,6 +13,8 @@ This repo has four folders "Main", "Side", "AllNodes" and "Client"
 - AllNodes is used for any server side node.
 - Client is what you install onto your computer. (These are mostly used for automatization, automatically uploading to NAS etc.)
 
+> NOTE: just because something is in specific directory doesn't have to mean it's incompatible, it's more so recommendation and where I'll be testing that.
+
 ## Constructs
 
 Construct is small JSON-like structure file that tells the node what services you want to have managed by this code. How often it runs / what / how etc.
