@@ -17,24 +17,31 @@ if id "$nameSpace" &>/dev/null; then
 else
     match=0
     while(( $math ==0 )); do
-    read -p "Enter '$nameSpace' password: " password
-    echo
-    read -p "Confirm Password: " confirm
-    echo
-    if [[ "$password" == "$confirm" ]]; then
-        match=1
-    end
+        read -p "Enter '$nameSpace' password: " password
+        echo
+        read -p "Confirm Password: " confirm
+        echo
+        if [[ "$password" == "$confirm" ]]; then
+            match=1
+        end
     done
 
-    useradd $nameSpace -p $password
+    useradd --create-home --shell /bin/bash $nameSpace -p $password
     sudo usermod -a -G sudo $nameSpace
 
     echo "Created '$nameSpace'"
 end
 
+mkdir -p /home/$nameSpace/ServerData
+cp -r . /home/$nameSpace/ServerData
+chown -R $nameSpace:$nameSpace /home/$nameSpace/ServerData
+
 sudo apt update && sudo apt upgrade
 
 echo "Downlaoding dependencies (might ask for some configuration, not fully automatic!)"
 sudo apt install -y python3 python3-pip sqlite3
+
+echo "Executing initialisation of Constructs!"
+sudo python3 /home/$nameSpace/ServerData/Constructs/Constructs.py
 
 echo "Next time you log in and out 'Galena' should start working!"
