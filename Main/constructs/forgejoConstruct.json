@@ -1,0 +1,13 @@
+{
+    "run" : {
+        "type" : "never"
+    },
+    "initRun" : [
+        "sudo apt update > /dev/null && sudo apt upgrade > /dev/null",
+        "sudo apt install -y sqlite3 docker.io > /dev/null",
+        "sudo docker run -d --name forgejo -p 7000:3000 -v /home/pi/forgejo:/data --restart unless-stopped codeberg.org/forgejo/forgejo:16.0.2"
+    ],
+    "data" : {
+
+    }
+}

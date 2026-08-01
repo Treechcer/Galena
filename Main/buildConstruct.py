@@ -19,6 +19,10 @@ def runCommands(commands, inputs = []):
 
 def getArguments(con, argObj):
     inputs = []
+
+    if argObj not in con["data"]:
+        return []
+
     for ask in con["data"][argObj]["arguments"]:
         if ask["isNecesarry"]:
             inputs.append(input(f"The construct want to have input for '{ask["name"]}' with description '{ask["comment"]}' of type '{ask["type"]}': "))
