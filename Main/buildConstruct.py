@@ -3,6 +3,8 @@ import os
 import json
 import subprocess
 
+from RWDdata import *
+
 global constructs
 
 def runCommands(commands, inputs = []):
@@ -30,16 +32,30 @@ def getArguments(con, argObj):
 
     return inputs
 
+def wasInit(cursor, db, name):
+    result = cursor.execute(f"SELECT init FROM {db} WHERE name = ? LIMIT 1", (name,)).fetchone()
+    if result and result[0] == 1:
+        return True
+    return False
+
 def main():
+    conn, cursor = getDB()
+    initDBTables(cursor)
+    
     constructs = os.listdir("constructs")
+    writeAllConstructs(conn, cursor, constructs)
 
     for construct in constructs:
         with open(os.path.join(os.getcwd(), "constructs", construct), "r") as file:
             JSONconstruct = json.loads(file.read())
             #print(JSONconstruct)
 
-            if (JSONconstruct["run"]["type"] == "never" and "initRun" in JSONconstruct):
+            if (JSONconstruct["run"]["type"] == "never" and "initRun" in JSONconstruct and not wasInit(cursor, "constructs", construct)):
                 runCommands(JSONconstruct["initRun"], getArguments(JSONconstruct, "initRun"))
+                writeInit(conn, cursor, "constructs", construct)
+
+
+    stopConnection(conn)
 
 if __name__ == "__main__":
     main()
