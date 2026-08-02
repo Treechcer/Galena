@@ -76,6 +76,9 @@ def writeInit(connection, cursor, db, name):
 
 def writeAllConstructs(connection, cursor, constrcts):
     for const in constrcts:
+        if const.split(".")[1] != "json":
+            continue
+        
         if not getDataByCondition(cursor, "constructs", "name", const):
             jsonData = ""
             with open(os.path.join("constructs", const), "r") as f:

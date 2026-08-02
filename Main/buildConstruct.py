@@ -8,6 +8,7 @@ from RWDdata import *
 global constructs
 
 def runCommands(commands, inputs = []):
+    os.chdir("constructs")
     for com in commands:
         counter = 1
         for input in inputs:
@@ -17,6 +18,8 @@ def runCommands(commands, inputs = []):
         print(com)
         subprocess.run(com, shell=True)
 
+    os.chdir("..")
+
 def getArguments(con, argObj):
     inputs = []
 
@@ -25,7 +28,10 @@ def getArguments(con, argObj):
 
     for ask in con["data"][argObj]["arguments"]:
         if ask["isNecesarry"]:
-            inputs.append(input(f"The construct want to have input for '{ask["name"]}' with description '{ask["comment"]}' of type '{ask["type"]}': "))
+            inp = ""
+            while (inp == "" or len(inp) == 0):
+                inp = input(f"The construct want to have input for '{ask["name"]}' with description '{ask["comment"]}' of type '{ask["type"]}': ")
+            inputs.append(inp)
         elif not ask["isNecesarry"]:
             inp = input(f"The construct want to have input for '{ask["name"]}' with description '{ask["comment"]}' of type '{ask["type"]}' with default value '{ask["defaultValue"]}': ")
 
@@ -42,7 +48,7 @@ def wasInit(cursor, db, name):
         return True
     return False
 
-def main():
+def constructBuilder(arg=""):
     conn, cursor = getDB()
     initDBTables(cursor)
     
@@ -51,12 +57,18 @@ def main():
 
     for construct in constructs:
         with open(os.path.join(os.getcwd(), "constructs", construct), "r") as file:
+            if file.name.split(".")[1] != "json":
+                continue
             JSONconstruct = json.loads(file.read())
             #print(JSONconstruct)
 
             if (JSONconstruct["run"]["type"] == "never" and "initRun" in JSONconstruct and not wasInit(cursor, "constructs", construct)):
                 runCommands(JSONconstruct["initRun"], getArguments(JSONconstruct, "initRun"))
                 writeInit(conn, cursor, "constructs", construct)
+
+            if (JSONconstruct["run"]["type"] == "boot" and arg == "boot"):
+                #Boot can't require arguments!
+                runCommands(JSONconstruct["boot"], [])
 
 
     stopConnection(conn)

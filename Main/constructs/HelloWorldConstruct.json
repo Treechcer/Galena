@@ -1,0 +1,15 @@
+{
+    "run" : {
+        "type" : "boot"
+    },
+    "initRun" : [
+        "sudo apt update > /dev/null && sudo apt upgrade > /dev/null",
+        "sudo apt install -y python3 > /dev/null"
+    ],
+    "boot" : [
+        "python3 main.py 50000 &"
+    ],
+    "data" : {
+
+    }
+}
