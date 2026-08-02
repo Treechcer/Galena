@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-$nameSpace="Galena"
+nameSpace="Galena"
 
 echo "This will create you a new user called Galena"
 
@@ -16,21 +16,21 @@ if id "$nameSpace" &>/dev/null; then
     echo "$nameSpace was alredy initialised."
 else
     match=0
-    while(( $math ==0 )); do
+    while [[ "$match" == 0 ]]; do
         read -p "Enter '$nameSpace' password: " password
         echo
         read -p "Confirm Password: " confirm
         echo
         if [[ "$password" == "$confirm" ]]; then
             match=1
-        end
+        fi
     done
 
     useradd --create-home --shell /bin/bash $nameSpace -p $password
     sudo usermod -a -G sudo $nameSpace
 
     echo "Created '$nameSpace'"
-end
+fi
 
 mkdir -p /home/$nameSpace/ServerData
 cp -r . /home/$nameSpace/ServerData
@@ -42,6 +42,16 @@ echo "Downlaoding dependencies (might ask for some configuration, not fully auto
 sudo apt install -y python3 python3-pip sqlite3
 
 echo "Executing initialisation of Constructs!"
-sudo python3 /home/$nameSpace/ServerData/Constructs/Constructs.py
+
+place=$(pwd)
+cd /home/$nameSpace/ServerData
+sudo -u $nameSpace python3 buildConstruct.py
+cd "$place"
+
+cp ./galena.service /etc/systemd/system/galena.service
+
+sed -i 's|${exec}|/home/'"$nameSpace"'/ServerData/manager.py|g' /etc/systemd/system/galena.service
+systemctl daemon-reload
+sudo systemctl start galena
 
 echo "Next time you log in and out 'Galena' should start working!"
