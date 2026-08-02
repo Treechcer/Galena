@@ -2,6 +2,7 @@
 import os
 import json
 import subprocess
+import getpass
 
 from RWDdata import *
 
@@ -15,7 +16,7 @@ def runCommands(commands, inputs = []):
             com = com.replace(f"${counter}", input)
             counter += 1
 
-        print(com)
+        subprocess.run(f"bash -c 'echo {com}'", shell=True, check=True)
         subprocess.run(com, shell=True)
 
     os.chdir("..")
@@ -47,6 +48,21 @@ def wasInit(cursor, db, name):
     if result and result[0] == 1:
         return True
     return False
+
+def doWork(type, constructName):
+    try:
+        with open(os.path.join(os.getcwd(), "constructs", constructName + ".json"), "r") as file:
+            try:
+                JSONconstruct = json.loads(file.read())
+            except:
+                print("Aborting, incorrect file.")
+    except FileNotFoundError:
+        if os.getcwd() != "/home/" + getpass.getuser() + "/ServerData":
+            try:
+                os.chdir("/home/" + getpass.getuser() + "/ServerData")
+                doWork(type, constructName)
+            except:
+                print("Aborting, could not find the file. Check current dir?")
 
 def constructBuilder(arg=""):
     conn, cursor = getDB()
