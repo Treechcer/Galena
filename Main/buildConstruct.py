@@ -74,4 +74,4 @@ def constructBuilder(arg=""):
     stopConnection(conn)
 
 if __name__ == "__main__":
-    main()
+    constructBuilder()
