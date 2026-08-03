@@ -49,7 +49,7 @@ cd /home/$nameSpace/ServerData
 sudo -u $nameSpace python3 buildConstruct.py
 cd "$place"
 
-cp ./galena.service /etc/systemd/system/galena.service
+cp ./dataFiles/galena.service /etc/systemd/system/galena.service
 
 sed -i 's|${user}|'"$nameSpace"'|g' /etc/systemd/system/galena.service
 sed -i 's|${wd}|/home/'"$nameSpace"'/ServerData|g' /etc/systemd/system/galena.service
