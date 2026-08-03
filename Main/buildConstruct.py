@@ -16,7 +16,7 @@ def runCommands(commands, inputs = []):
             com = com.replace(f"${counter}", input)
             counter += 1
 
-        subprocess.run(f"bash -c 'echo {com}'", shell=True, check=True)
+        #subprocess.run(f"bash -c 'echo {com}'", shell=True, check=True)
         subprocess.run(com, shell=True)
 
     os.chdir("..")
