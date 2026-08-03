@@ -12,11 +12,13 @@ from buildConstruct import constructBuilder, doWork
 def main():
     if len(sys.argv) <= 1:
         print("You have to parse some argument for manager to do stuff.")
+        exit(1)
 
-
-    if len(sys.argv) >= 2:
+    if len(sys.argv) >= 3:
         if sys.argv[1] == "restart":
             doWork(sys.argv[1], sys.argv[2])
+        else:
+            print(f"incorrect call of {sys.argv[1]} with apram {sys.argv[2]}")
     else:
         constructBuilder(sys.argv[1])
 
