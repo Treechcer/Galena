@@ -51,8 +51,11 @@ cd "$place"
 
 cp ./galena.service /etc/systemd/system/galena.service
 
+sed -i 's|${user}|'"$nameSpace"'|g' /etc/systemd/system/galena.service
+sed -i 's|${wd}|/home/'"$nameSpace"'/ServerData|g' /etc/systemd/system/galena.service
 sed -i 's|${exec}|/home/'"$nameSpace"'/ServerData/manager.py|g' /etc/systemd/system/galena.service
 systemctl daemon-reload
+sudo systemctl enable galena
 sudo systemctl start galena
 
 echo "Next time you log in and out 'Galena' should start working!"

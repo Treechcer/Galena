@@ -1,13 +1,16 @@
 [Unit]
 Description=Small multinode server manager
-After=network.target
+After=network-online.target
+Wants=network-online.target
 StartLimitIntervalSec=0
+
 [Service]
 Type=simple
 Restart=always
 RestartSec=1
-User=Galena
-ExecStart=python3 ${exec} boot
+User=${user}
+WorkingDirectory=${wd}
+ExecStart=/usr/bin/python3 ${exec} boot
 
 [Install]
 WantedBy=multi-user.target
