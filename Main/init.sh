@@ -15,18 +15,19 @@ echo "This will create you a new user called Galena"
 if id "$nameSpace" &>/dev/null; then
     echo "$nameSpace was alredy initialised."
 else
-    match=0
-    while [[ "$match" == 0 ]]; do
-        read -p "Enter '$nameSpace' password: " password
-        echo
-        read -p "Confirm Password: " confirm
-        echo
-        if [[ "$password" == "$confirm" ]]; then
-            match=1
-        fi
-    done
+    #match=0
+    #while [[ "$match" == 0 ]]; do
+    #    read -p "Enter '$nameSpace' password: " password
+    #    echo
+    #    read -p "Confirm Password: " confirm
+    #    echo
+    #    if [[ "$password" == "$confirm" ]]; then
+    #        match=1
+    #    fi
+    #done
 
-    useradd --create-home --shell /bin/bash $nameSpace -p $password
+    useradd --create-home --shell /bin/bash $nameSpace
+    sudo passwd $nameSpace
     sudo usermod -a -G sudo $nameSpace
 
     echo "Created '$nameSpace'"

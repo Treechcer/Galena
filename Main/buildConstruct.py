@@ -31,10 +31,10 @@ def getArguments(con, argObj):
         if ask["isNecesarry"]:
             inp = ""
             while (inp == "" or len(inp) == 0):
-                inp = input(f"The construct want to have input for '{ask["name"]}' with description '{ask["comment"]}' of type '{ask["type"]}': ")
+                inp = input(f"The construct want to have input for '{ask['name']}' with description '{ask['comment']}' of type '{ask['type']}': ")
             inputs.append(inp)
         elif not ask["isNecesarry"]:
-            inp = input(f"The construct want to have input for '{ask["name"]}' with description '{ask["comment"]}' of type '{ask["type"]}' with default value '{ask["defaultValue"]}': ")
+            inp = input(f"The construct want to have input for '{ask['name']}' with description '{ask['comment']}' of type '{ask['type']}' with default value '{ask["defaultValue"]}': ")
 
             if len(inp) == 0:
                 inp = ask["defaultValue"]
