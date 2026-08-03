@@ -24,20 +24,20 @@ def runCommands(commands, inputs = []):
 def getArguments(con, argObj):
     inputs = []
 
-    if argObj not in con["data"]:
+    if argObj not in con['data']:
         return []
 
-    for ask in con["data"][argObj]["arguments"]:
-        if ask["isNecesarry"]:
+    for ask in con['data'][argObj]['arguments']:
+        if ask['isNecesarry']:
             inp = ""
             while (inp == "" or len(inp) == 0):
                 inp = input(f"The construct want to have input for '{ask['name']}' with description '{ask['comment']}' of type '{ask['type']}': ")
             inputs.append(inp)
-        elif not ask["isNecesarry"]:
-            inp = input(f"The construct want to have input for '{ask['name']}' with description '{ask['comment']}' of type '{ask['type']}' with default value '{ask["defaultValue"]}': ")
+        elif not ask['isNecesarry']:
+            inp = input(f"The construct want to have input for '{ask['name']}' with description '{ask['comment']}' of type '{ask['type']}' with default value '{ask['defaultValue']}': ")
 
             if len(inp) == 0:
-                inp = ask["defaultValue"]
+                inp = ask['defaultValue']
 
             inputs.append(inp)
 
@@ -78,13 +78,13 @@ def constructBuilder(arg=""):
             JSONconstruct = json.loads(file.read())
             #print(JSONconstruct)
 
-            if (JSONconstruct["run"]["type"] == "never" and "initRun" in JSONconstruct and not wasInit(cursor, "constructs", construct)):
-                runCommands(JSONconstruct["initRun"], getArguments(JSONconstruct, "initRun"))
+            if (JSONconstruct['run']['type'] == "never" and "initRun" in JSONconstruct and not wasInit(cursor, "constructs", construct)):
+                runCommands(JSONconstruct['initRun'], getArguments(JSONconstruct, "initRun"))
                 writeInit(conn, cursor, "constructs", construct)
 
-            if (JSONconstruct["run"]["type"] == "boot" and arg == "boot"):
+            if (JSONconstruct['run']['type'] == "boot" and arg == "boot"):
                 #Boot can't require arguments!
-                runCommands(JSONconstruct["boot"], [])
+                runCommands(JSONconstruct['boot'], [])
 
 
     stopConnection(conn)

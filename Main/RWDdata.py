@@ -83,7 +83,7 @@ def writeAllConstructs(connection, cursor, constrcts):
             jsonData = ""
             with open(os.path.join("constructs", const), "r") as f:
                 jsonData = json.loads(f.read())
-            cursor.execute("INSERT INTO constructs (name, init, runType) VALUES (?, ?, ?)", (const, 0, jsonData["run"]["type"]))
+            cursor.execute("INSERT INTO constructs (name, init, runType) VALUES (?, ?, ?)", (const, 0, jsonData['run']['type']))
 
     connection.commit()
 
