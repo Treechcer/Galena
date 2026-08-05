@@ -1,3 +1,8 @@
+import os
+import sys
+
+os.chdir(os.path.dirname(sys.argv[0]))
+
 for i in range(1, 5):
 
     inp=""

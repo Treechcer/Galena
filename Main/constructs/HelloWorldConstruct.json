@@ -7,7 +7,7 @@
         "sudo apt install -y python3 > /dev/null"
     ],
     "boot" : [
-        "python3 main.py 50000 &"
+        "python3 ./..dataFiles/main.py 50000 &"
     ],
     "data" : {
 

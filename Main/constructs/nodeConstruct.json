@@ -3,9 +3,11 @@
         "type" : "boot"
     },
     "initRun" : [
-        "python3 ./NodeWorker/initNodes.py",
-        "sudo chmod +x ./NodeWorker/nodeWorker.sh",
-        "./NodeWorker/nodeWorker.sh"
+        "sudo apt update > /dev/null && sudo apt upgrade > /dev/null",
+        "sudo apt install -y python3 > /dev/null",
+        "python3 ./../NodeWorker/initNodes.py",
+        "sudo chmod +x ./../NodeWorker/nodeWorker.sh",
+        "sudo ./../NodeWorker/nodeWorker.sh"
     ],
     "boot" : [
         "./../NodeWorker/nodeWorker.sh"

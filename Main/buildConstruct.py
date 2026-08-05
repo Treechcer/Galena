@@ -78,7 +78,7 @@ def constructBuilder(arg=""):
             JSONconstruct = json.loads(file.read())
             #print(JSONconstruct)
 
-            if (JSONconstruct['run']['type'] == "never" and "initRun" in JSONconstruct and not wasInit(cursor, "constructs", construct)):
+            if ("initRun" in JSONconstruct and not wasInit(cursor, "constructs", construct)):
                 runCommands(JSONconstruct['initRun'], getArguments(JSONconstruct, "initRun"))
                 writeInit(conn, cursor, "constructs", construct)
 
