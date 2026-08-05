@@ -1,0 +1,15 @@
+{
+    "run" : {
+        "type" : "boot"
+    },
+    "initRun" : [
+        "python3 ./../NodeWorker/initNodes.py",
+        "./../NodeWorker/nodeWorrker.sh"
+    ],
+    "boot" : [
+        "./../NodeWorker/nodeWorrker.sh"
+    ],
+    "data" : {
+
+    }
+}

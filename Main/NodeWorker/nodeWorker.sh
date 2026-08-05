@@ -27,11 +27,11 @@ for i in $(seq  1 4); do
     if [[ $runNode == 1 ]]; then
         #echo "RUN NODE"
         bit=$(getBit $i)
-        echo "$bit"
+        i2cset -y -m $(("2#$bit")) 1 0x20 1 0xff
     else
         #echo "NOT RUN NODE"
         bit=$(getBit $i)
-        echo "$bit"
+        i2cset -y -m $(("2#$bit")) 1 0x20 1 0x00
     fi
 
 done
