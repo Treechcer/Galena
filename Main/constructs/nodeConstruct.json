@@ -3,11 +3,12 @@
         "type" : "boot"
     },
     "initRun" : [
-        "python3 ./../NodeWorker/initNodes.py",
-        "./../NodeWorker/nodeWorrker.sh"
+        "python3 ./NodeWorker/initNodes.py",
+        "sudo chmod +x ./NodeWorker/nodeWorker.sh",
+        "./NodeWorker/nodeWorker.sh"
     ],
     "boot" : [
-        "./../NodeWorker/nodeWorrker.sh"
+        "./../NodeWorker/nodeWorker.sh"
     ],
     "data" : {
 
