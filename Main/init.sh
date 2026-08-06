@@ -58,4 +58,9 @@ systemctl daemon-reload
 sudo systemctl enable galena
 sudo systemctl start galena
 
+if [ $(sudo raspi-config nonint get_i2c) -eq 1 ]; then
+    sudo raspi-config nonint do_i2c 0
+    echo "Enabled I2C"
+fi
+
 echo "Next time you log in and out 'Galena' should start working!"
