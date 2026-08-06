@@ -65,6 +65,7 @@ fi
 
 echo "adding powerOff script"
 cp ./dataFiles/NodePoweroff.service /etc/systemd/system/NodePoweroff.service
+sudo systemctl daemon-reload
 sudo systemctl enable NodePoweroff
 sudo systemctl start NodePoweroff
 
