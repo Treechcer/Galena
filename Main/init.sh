@@ -63,4 +63,9 @@ if [ $(sudo raspi-config nonint get_i2c) -eq 1 ]; then
     echo "Enabled I2C"
 fi
 
+echo "adding powerOff script"
+cp ./dataFiles/NodePoweroff.service /etc/systemd/system/NodePoweroff.service
+sudo systemctl enable NodePoweroff
+sudo systemctl start NodePoweroff
+
 echo "Next time you log in and out 'Galena' should start working!"

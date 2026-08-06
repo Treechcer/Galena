@@ -49,7 +49,7 @@ def getDirectory():
     return (os.path.join("/home/", getpass.getuser()) + "/")
 
 def getDBFile():
-    return os.path.join(getDirectory(), ".Galeta.db")
+    return os.path.join(getDirectory(), ".Galena.db")
 
 def getDB():
     dbFile = getDBFile()

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd "$(dirname "$0")"
 #echo "$(pwd)"
 
@@ -25,6 +27,7 @@ getBit(){
 }
 
 for i in $(seq  1 4); do
+    chmod +x ./node$i.sh
     runNode="$(./node$i.sh)"
 
     if [ "$runNode" = "1" ]; then
