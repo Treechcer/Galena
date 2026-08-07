@@ -67,6 +67,7 @@ echo "adding powerOff script"
 cp ./dataFiles/NodePoweroff.service /etc/systemd/system/NodePoweroff.service
 sudo systemctl daemon-reload
 sudo systemctl enable NodePoweroff
-sudo systemctl start NodePoweroff
+#I shouldn't start it probably?
+#sudo systemctl start NodePoweroff
 
 echo "Next time you log in and out 'Galena' should start working!"

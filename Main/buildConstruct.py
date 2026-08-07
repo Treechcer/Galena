@@ -86,7 +86,6 @@ def constructBuilder(arg=""):
                 #Boot can't require arguments!
                 runCommands(JSONconstruct['boot'], [])
 
-
     stopConnection(conn)
 
 if __name__ == "__main__":

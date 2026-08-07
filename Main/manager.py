@@ -25,7 +25,5 @@ def main():
     else:
         constructBuilder(sys.argv[1])
 
-    
-
 if __name__ == "__main__":
     main()
