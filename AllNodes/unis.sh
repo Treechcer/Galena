@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #temp script, will be redone later!
 
 #https://askubuntu.com/a/15856
