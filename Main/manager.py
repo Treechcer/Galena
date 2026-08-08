@@ -15,7 +15,7 @@ def main():
         print("You have to parse some argument for manager to do stuff.")
         exit(1)
 
-    os.chdir(os.path.dirname(sys.argv[0]))
+    os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
     if len(sys.argv) >= 3:
         if sys.argv[1] == "restart":
