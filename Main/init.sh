@@ -30,6 +30,11 @@ else
     sudo passwd $nameSpace
     sudo usermod -a -G sudo $nameSpace
 
+    sudo touch /etc/sudoers.d/$nameSpace
+    Permission="$nameSpace ALL=(ALL:ALL) ALL"
+    sudo bash -c "echo -e '$Permission' >> /etc/sudoers.d/$nameSpace"
+    sudo chmod 440 /etc/sudoers.d/$nameSpace
+
     echo "Created '$nameSpace'"
 fi
 
