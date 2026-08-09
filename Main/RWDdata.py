@@ -2,6 +2,7 @@ import os
 import getpass
 import sqlite3
 import json
+import time
 
 class column:
     def __init__(self):
@@ -55,7 +56,7 @@ def getDB():
     dbFile = getDBFile()
 
     #init DB
-    conn = sqlite3.connect(dbFile)
+    conn = sqlite3.connect(dbFile, timeout=30)
     cursor = conn.cursor()
 
     return conn, cursor
@@ -71,8 +72,20 @@ def addData(connection, cursor, db, column, data):
     connection.commit()
 
 def writeInit(connection, cursor, db, name):
-    cursor.execute(f"UPDATE {db} SET init = 1 WHERE name = ?", (name,))
-    connection.commit()
+    retry_count = 10
+    while True:
+        try:
+            cursor.execute(f"UPDATE {db} SET init = 1 WHERE name = ?", (name,))
+            connection.commit()
+            break
+        except sqlite3.OperationalError as e:
+            if "locked" in str(e).lower() and retry_count > 0:
+                retry_count -= 1
+                time.sleep(0.25)
+                continue
+            #it's not handled btw
+            raise Exception("Could not connect to DB")
+
 
 def writeAllConstructs(connection, cursor, constrcts):
     for const in constrcts:
