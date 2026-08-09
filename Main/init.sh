@@ -31,7 +31,7 @@ else
     sudo usermod -a -G sudo $nameSpace
 
     sudo touch /etc/sudoers.d/$nameSpace
-    Permission="$nameSpace ALL=(ALL:ALL) ALL"
+    Permission="$nameSpace ALL=(ALL:ALL) NOPASSWD: ALL"
     sudo bash -c "echo -e '$Permission' >> /etc/sudoers.d/$nameSpace"
     sudo chmod 440 /etc/sudoers.d/$nameSpace
 

@@ -10,3 +10,4 @@ fi
 
 sudo userdel Galena
 sudo rm -rd /home/Galena
+sudo rm /etc/sudoers.d/Galena
