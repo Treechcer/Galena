@@ -8,6 +8,22 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+node="Main"
+input="$0"
+
+while [[ true ]]; do
+    if [[ "$input" == "main" ]]; then
+        break
+    elif [[ "$input" == "side" ]]; then
+        node="Side"
+        break
+    fi
+
+    echo "Input which node you want (main / side)"
+    read node
+
+done
+
 nameSpace="Galena"
 
 echo "This will create you a new user called Galena"
@@ -40,6 +56,7 @@ fi
 
 mkdir -p /home/$nameSpace/ServerData
 cp -r . /home/$nameSpace/ServerData
+cp -r ./../$node /home/$nameSpace/ServerData
 chown -R $nameSpace:$nameSpace /home/$nameSpace/ServerData
 
 sudo apt update && sudo apt upgrade
@@ -48,6 +65,23 @@ echo "Downlaoding dependencies (might ask for some configuration, not fully auto
 sudo apt install -y python3 python3-pip sqlite3
 
 echo "Executing initialisation of Constructs!"
+
+if [[ "$node" == "main" ]]
+    if [ $(sudo raspi-config nonint get_i2c) -eq 1 ]; then
+        sudo raspi-config nonint do_i2c 0
+        echo "Enabled I2C"
+    fi
+
+    #TODO: finish
+
+    #echo "dtoverlay=dwc2,dr_mode=host" >> "/boot/firmware/config.txt"
+    #sed -i 's/rootwait/rootwait modules-load=dwc2,g_ether/' "/boot/firmware/cmdline.txt"
+else
+    #echo "dtoverlay=dwc2" >> "/boot/firmware/config.txt"
+
+    #sed -i 's/[all]/[all]\n modules-load=dwc2,g_ether/' "/boot/firmware/cmdline.txt"
+    #sed -i 's/rootwait/rootwait modules-load=dwc2,g_ether/' "/boot/firmware/cmdline.txt"
+fi
 
 place=$(pwd)
 cd /home/$nameSpace/ServerData
@@ -62,11 +96,6 @@ sed -i 's|${exec}|/home/'"$nameSpace"'/ServerData/manager.py|g' /etc/systemd/sys
 systemctl daemon-reload
 sudo systemctl enable galena
 sudo systemctl start galena
-
-if [ $(sudo raspi-config nonint get_i2c) -eq 1 ]; then
-    sudo raspi-config nonint do_i2c 0
-    echo "Enabled I2C"
-fi
 
 echo "adding powerOff script"
 cp ./dataFiles/NodePoweroff.service /etc/systemd/system/NodePoweroff.service
