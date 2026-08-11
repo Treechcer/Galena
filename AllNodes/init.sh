@@ -77,10 +77,8 @@ if [[ "$node" == "main" ]]
     #echo "dtoverlay=dwc2,dr_mode=host" >> "/boot/firmware/config.txt"
     #sed -i 's/rootwait/rootwait modules-load=dwc2,g_ether/' "/boot/firmware/cmdline.txt"
 else
-    #echo "dtoverlay=dwc2" >> "/boot/firmware/config.txt"
-
-    #sed -i 's/[all]/[all]\n modules-load=dwc2,g_ether/' "/boot/firmware/cmdline.txt"
-    #sed -i 's/rootwait/rootwait modules-load=dwc2,g_ether/' "/boot/firmware/cmdline.txt"
+    sudo sed -i '/^\[all\]/a dtoverlay=dwc2' "/boot/firmware/config.txt"
+    sudo sed -i 's/rootwait/rootwait modules-load=dwc2,g_serial/' "/boot/firmware/cmdline.txt"
 fi
 
 place=$(pwd)

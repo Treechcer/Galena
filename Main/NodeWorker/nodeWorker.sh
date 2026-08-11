@@ -28,7 +28,8 @@ getBit(){
 
 for i in $(seq  1 4); do
     chmod +x ./node$i.sh
-    runNode="$(./node$i.sh)"
+    source "./node$i.sh"
+    runNode="$(get_node_num)"
 
     if [ "$runNode" = "1" ]; then
         #echo "RUN NODE"

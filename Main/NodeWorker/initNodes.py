@@ -15,7 +15,7 @@ for i in range(1, 5):
         code = f"""#!/bin/bash
 get_node_num(){{
     node{i}={value}
-    echo "$node{i}
+    echo "$node{i}"
 }}
 """
 
