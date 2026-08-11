@@ -1,9 +1,11 @@
-#ssh-keygen -t rsa
+ssh-keygen -t rsa
 
-for i in $(seq  1 4); do
+i=1
+while [ $i -le 4 ]; do
     chmod +x ./node$i.sh
     source "./node$i.sh"
     runNode="$(get_node_num)"
+
     if [[ "$runNode" == "1" ]]; then
         echo "Initing node$i"
         
@@ -28,21 +30,28 @@ for i in $(seq  1 4); do
 
             if [[ "$inp" == "yes" ]]; then
                 ssh-copy-id $username@$hostnameOrIp
-
+                node="node$i"
                 echo "
 get_hostname(){
-    node($i)_hostname=$hostnameOrIp
+    ${node}_hostname=$hostnameOrIp
     echo $hostnameOrIp
 }
 
 get_username(){
-    node($i)_username=$username
+    ${node}_username=$username
     echo $username
 }
-" >> node$i.sh
+" >> $node.sh
+                i=$(($i+1))
+                break
             elif [[ "$inp" == "no" ]]; then
-                i=$i-1
+                i=$i
+                break
+            else 
+                echo "Type yes or no."
             fi
         done
+    else
+        i=$(($i+1))
     fi
 done
