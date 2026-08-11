@@ -1,3 +1,5 @@
+cd "$(dirname "$0")"
+
 ssh-keygen -t rsa
 
 i=1

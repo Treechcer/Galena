@@ -9,12 +9,13 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 node="Main"
-input="$0"
+input="$1"
 
 while [[ true ]]; do
-    if [[ "$input" == "main" ]]; then
+    if [[ "$input" == "Main" ]]; then
+        node="Main"
         break
-    elif [[ "$input" == "side" ]]; then
+    elif [[ "$input" == "Side" ]]; then
         node="Side"
         break
     fi
@@ -56,7 +57,7 @@ fi
 
 mkdir -p /home/$nameSpace/ServerData
 cp -r . /home/$nameSpace/ServerData
-cp -r ./../$node /home/$nameSpace/ServerData
+cp -r ./../$node/. /home/$nameSpace/ServerData
 chown -R $nameSpace:$nameSpace /home/$nameSpace/ServerData
 
 sudo apt update && sudo apt upgrade
@@ -66,7 +67,7 @@ sudo apt install -y python3 python3-pip sqlite3
 
 echo "Executing initialisation of Constructs!"
 
-if [[ "$node" == "main" ]]
+if [[ "$node" == "Main" ]]; then
     if [ $(sudo raspi-config nonint get_i2c) -eq 1 ]; then
         sudo raspi-config nonint do_i2c 0
         echo "Enabled I2C"
