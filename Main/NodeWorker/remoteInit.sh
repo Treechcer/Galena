@@ -1,9 +1,20 @@
 cd "$(dirname "$0")"
 
-ssh-keygen -t rsa
+keyfile=/home/$USER/.ssh/id_rsa
+if [ ! -f "/home/$USER/.ssh/id_rsa" ]; then
+    echo "generating new rsa ssh keys"
+    ssh-keygen -t rsa -N "" -f "$keyfile"
+fi
 
 i=1
 while [ $i -le 4 ]; do
+
+    if [ ! -f "./node$i.sh" ]; then
+        echo "File node$i.sh doesn't exist. Skipping."
+        i=$(($i+1))
+        continue
+    fi
+
     chmod +x ./node$i.sh
     source "./node$i.sh"
     runNode="$(get_node_num)"
