@@ -12,6 +12,8 @@ sudo userdel Galena
 sudo rm -rd /home/Galena
 sudo rm /etc/sudoers.d/Galena
 
+sudo systemctl start NodePoweroff
+
 sudo rm /etc/systemd/system/NodePoweroff.service
 sudo rm /etc/systemd/system/galena.service
 
