@@ -4,8 +4,8 @@
     },
     "initRun" : [
         "sudo apt update > /dev/null && sudo apt upgrade > /dev/null",
-        "touch ./../dataFiles/hostname.py",
-        "echo 'def getHostname():\n    return \"$1\"' > ./../dataFiles/hostname.py"
+        "sudo apt update && sudo apt install smbclient",
+        "touch ./../dataFiles/hostname.sh && echo 'echo \"$1\"' > ./../dataFiles/hostname.sh"
     ],
     "data" : {
         "initRun" : {

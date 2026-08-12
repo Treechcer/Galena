@@ -104,6 +104,7 @@ sudo systemctl enable NodePoweroff
 if [[ "$node" == "Side" ]]; then
     cp ./dataFiles/galena-gitCopy.service /etc/systemd/system/galena-gitCopy.service
     cp ./dataFiles/galena-gitCopy.timer /etc/systemd/system/galena-gitCopy.timer
+    sed -i 's|${exec}|/home/'"$nameSpace"'/ServerData/dataFiles/gitCopy.sh|g' /etc/systemd/system/galena-gitCopy.service
     sudo systemctl daemon-reload
     sudo systemctl enable --now galena-gitCopy.timer
 end
