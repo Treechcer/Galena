@@ -14,7 +14,7 @@ sudo rm /etc/sudoers.d/Galena
 
 sudo systemctl start NodePoweroff
 
-sudo rm /etc/systemd/system/NodePoweroff.service
+sudo rm /etc/systemd/system/galena-NodePoweroff.service
 sudo rm /etc/systemd/system/galena.service
 
 systemctl daemon-reload

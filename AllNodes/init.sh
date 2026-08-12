@@ -97,9 +97,17 @@ sudo systemctl enable galena
 sudo systemctl start galena
 
 echo "adding powerOff script"
-cp ./dataFiles/NodePoweroff.service /etc/systemd/system/NodePoweroff.service
+cp ./dataFiles/galena-NodePoweroff.service /etc/systemd/system/galena-NodePoweroff.service
 sudo systemctl daemon-reload
 sudo systemctl enable NodePoweroff
+
+if [[ "$node" == "Side" ]]; then
+    cp ./dataFiles/galena-gitCopy.service /etc/systemd/system/galena-gitCopy.service
+    cp ./dataFiles/galena-gitCopy.timer /etc/systemd/system/galena-gitCopy.timer
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now galena-gitCopy.timer
+end
+
 #I shouldn't start it probably?
 #sudo systemctl start NodePoweroff
 

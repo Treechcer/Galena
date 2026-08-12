@@ -1,0 +1,19 @@
+{
+    "run" : {
+        "type" : "never"
+    },
+    "initRun" : [
+        "sudo apt update > /dev/null && sudo apt upgrade > /dev/null",
+        "sudo apt install -y samba samba-common-bin smbclient cifs-utils > /dev/null",
+        "sudo mkdir -p /mnt/forgejo > /dev/null",
+        "sudo bash -c \"echo -e '[FORGEJO NAS]\ncomment = Forgejo data\npath = /mnt/forgejo\nguest ok = yes\nread only = yes\nbrowsable = yes' >> /etc/samba/smb.conf\" > /dev/null",
+        "sudo chmod -R 755 /mnt/forgejo > /dev/null",
+        "sudo service smbd restart > /dev/null",
+        "sudo systemctl enable --now smbd > /dev/null"
+    ],
+    "data" : {
+        "initRun" : {
+
+        }
+    }
+}

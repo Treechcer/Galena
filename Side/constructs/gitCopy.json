@@ -1,0 +1,23 @@
+{
+    "run" : {
+        "type" : "never"
+    },
+    "initRun" : [
+        "sudo apt update > /dev/null && sudo apt upgrade > /dev/null",
+        "touch ./../dataFiles/hostname.py",
+        "echo 'def getHostname():\n    return \"$1\"' > ./../dataFiles/hostname.py"
+    ],
+    "data" : {
+        "initRun" : {
+            "arguments" : [
+                {
+                    "name" : "nodeHostname",
+                    "type" : "string",
+                    "comment" : "Hostname (or IP) of your host RPi",
+                    "isNecesarry" : true,
+                    "defaultValue" : ""
+                }
+            ]
+        }
+    }
+}

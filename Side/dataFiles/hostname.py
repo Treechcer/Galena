@@ -1,0 +1,2 @@
+def getHostname():  
+    return "testName"

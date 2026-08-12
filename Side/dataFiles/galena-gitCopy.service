@@ -1,0 +1,13 @@
+[Unit]
+Description=Periodic git Copy
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+RestartSec=1
+ExecStart=/usr/bin/python3 ${exec}
+
+[Install]
+WantedBy=multi-user.target
