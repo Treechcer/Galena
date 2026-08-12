@@ -7,7 +7,9 @@
         "sudo apt install -y python3 > /dev/null",
         "python3 ../NodeWorker/initNodes.py",
         "sudo chmod +x ../NodeWorker/nodeWorker.sh",
-        "sudo ../NodeWorker/nodeWorker.sh"
+        "sudo chmod +x ../NodeWorker/remoteInit.sh",
+        "sudo ../NodeWorker/nodeWorker.sh",
+        "sudo ../NodeWorker/remoteInit.sh"
     ],
     "boot" : [
         "sudo ../NodeWorker/nodeWorker.sh"
