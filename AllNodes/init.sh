@@ -107,9 +107,27 @@ if [[ "$node" == "Side" ]]; then
     sed -i 's|${exec}|/home/'"$nameSpace"'/ServerData/dataFiles/gitCopy.sh|g' /etc/systemd/system/galena-gitCopy.service
     sudo systemctl daemon-reload
     sudo systemctl enable --now galena-gitCopy.timer
-end
+fi
 
 #I shouldn't start it probably?
 #sudo systemctl start NodePoweroff
+
+if [[ "$node" == "Side" ]] && [[ $(hostname) =~ ^node[1-4]$ ]]; then
+    inp=""
+    while [ true ]; do
+        echo "Do you want to make your hostname 'node1-4'? (Preffered to have hostnames of node1-4 for nodes by how it's in the slots) [1-4 or no]" 
+        read inp
+
+        if [[ "$inp" =~ [1-4] ]]; do
+            sudo hostname "node$inp"
+        elif [ "$inp" == "no" ];
+            break
+        else
+            echo "You have to say 1, 2, 3, 4 or no"
+        fi
+
+    done
+
+fi
 
 echo "Next time you log in and out 'Galena' should start working!"
