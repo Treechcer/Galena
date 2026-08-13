@@ -12,8 +12,6 @@
         "sudo systemctl enable --now smbd > /dev/null"
     ],
     "data" : {
-        "initRun" : {
-
-        }
+        
     }
 }
