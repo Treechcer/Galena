@@ -12,16 +12,16 @@ node="Main"
 input="$1"
 
 while [[ true ]]; do
-    if [[ "$input" == "Main" ]]; then
+    if [[ "$input" == "Main" ]] || [[ "$input" == "main" ]]; then
         node="Main"
         break
-    elif [[ "$input" == "Side" ]]; then
+    elif [[ "$input" == "Side" ]] || [[ "$input" == "side" ]]; then
         node="Side"
         break
     fi
 
     echo "Input which node you want (main / side)"
-    read node
+    read input
 
 done
 
@@ -118,9 +118,9 @@ if [[ "$node" == "Side" ]] && [[ $(hostname) =~ ^node[1-4]$ ]]; then
         echo "Do you want to make your hostname 'node1-4'? (Preffered to have hostnames of node1-4 for nodes by how it's in the slots) [1-4 or no]" 
         read inp
 
-        if [[ "$inp" =~ [1-4] ]]; do
+        if [[ "$inp" =~ [1-4] ]]; then
             sudo hostname "node$inp"
-        elif [ "$inp" == "no" ];
+        elif [ "$inp" == "no" ]; then
             break
         else
             echo "You have to say 1, 2, 3, 4 or no"
