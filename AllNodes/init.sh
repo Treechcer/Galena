@@ -130,4 +130,11 @@ if [[ "$node" == "Side" ]] && [[ $(hostname) =~ ^node[1-4]$ ]]; then
 
 fi
 
+touch /home/$nameSpace/ServerData/userdata.sh
+echo "#!/bin/bash
+get_user_name(){
+    name=$namespace
+    echo $nameSpace
+}" >> /home/$nameSpace/ServerData/userdata.sh
+
 echo "Next time you log in and out 'Galena' should start working!"

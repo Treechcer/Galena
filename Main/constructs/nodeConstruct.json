@@ -9,9 +9,9 @@
         "sudo chmod +x ../NodeWorker/nodeWorker.sh",
         "sudo chmod +x ../NodeWorker/remoteInit.sh",
         "sudo chmod +x ../NodeWorker/autoNodeSetup.sh",
-        "sudo ../NodeWorker/nodeWorker.sh",
-        "sudo ../NodeWorker/remoteInit.sh",
-        "sudo ../NodeWorker/autoNodeSetup.sh"
+        "sudo -u $usr ../NodeWorker/nodeWorker.sh",
+        "sudo -u $usr ../NodeWorker/remoteInit.sh",
+        "sudo -u $usr ../NodeWorker/autoNodeSetup.sh"
     ],
     "boot" : [
         "sudo ../NodeWorker/nodeWorker.sh"
