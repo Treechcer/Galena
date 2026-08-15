@@ -16,7 +16,7 @@ def runCommands(commands, inputs = []):
         for input in inputs:
             com = com.replace(f"${counter}", input)
             counter += 1
-        com = com.replace("$ust", user)
+        com = com.replace("$usr", user)
 
         #subprocess.run(f"bash -c 'echo {com}'", shell=True, check=True)
         subprocess.run(com, shell=True)

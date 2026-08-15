@@ -27,6 +27,13 @@ done
 
 nameSpace="Galena"
 
+touch /home/$nameSpace/ServerData/userdata.sh
+echo "#!/bin/bash
+get_user_name(){
+    name=$namespace
+    echo $nameSpace
+}" >> /home/$nameSpace/ServerData/userdata.sh
+
 echo "This will create you a new user called Galena"
 
 if id "$nameSpace" &>/dev/null; then
@@ -129,12 +136,5 @@ if [[ "$node" == "Side" ]] && [[ $(hostname) =~ ^node[1-4]$ ]]; then
     done
 
 fi
-
-touch /home/$nameSpace/ServerData/userdata.sh
-echo "#!/bin/bash
-get_user_name(){
-    name=$namespace
-    echo $nameSpace
-}" >> /home/$nameSpace/ServerData/userdata.sh
 
 echo "Next time you log in and out 'Galena' should start working!"
