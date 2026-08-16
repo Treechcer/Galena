@@ -16,7 +16,7 @@ while [ $i -le 4 ]; do
     fi
 
     chmod +x ./node$i.sh
-    source "./node$i.sh"F
+    source "./node$i.sh"
     runNode="$(get_node_num)"
 
     if [[ "$runNode" == "1" ]]; then
