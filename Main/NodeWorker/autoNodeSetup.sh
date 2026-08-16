@@ -1,3 +1,5 @@
+cd "$(dirname "$0")"
+
 i=1
 while [ $i -le 4 ]; do
     if [ -f "./node$i.sh" ]; then

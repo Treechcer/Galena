@@ -11,7 +11,7 @@ global constructs
 def runCommands(commands, inputs = []):
     canUser = True
     try:
-        import userdata
+        import userdata # pyright: ignore[reportMissingImports]
     except:
         print("File 'userdata.py' wasn't found, user can't be used!")
         canUser = False
