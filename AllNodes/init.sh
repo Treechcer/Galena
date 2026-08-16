@@ -27,13 +27,6 @@ done
 
 nameSpace="Galena"
 
-touch /home/$nameSpace/ServerData/userdata.sh
-echo "#!/bin/bash
-get_user_name(){
-    name=$namespace
-    echo $nameSpace
-}" >> /home/$nameSpace/ServerData/userdata.sh
-
 echo "This will create you a new user called Galena"
 
 if id "$nameSpace" &>/dev/null; then
@@ -66,6 +59,12 @@ mkdir -p /home/$nameSpace/ServerData
 cp -r . /home/$nameSpace/ServerData
 cp -r ./../$node/. /home/$nameSpace/ServerData
 chown -R $nameSpace:$nameSpace /home/$nameSpace/ServerData
+
+touch /home/$nameSpace/ServerData/userdata.py
+echo "#!/bin/bash
+def getUserName():
+    return '$nameSpace'
+" >> /home/$nameSpace/ServerData/userdata.py
 
 sudo apt update && sudo apt upgrade
 

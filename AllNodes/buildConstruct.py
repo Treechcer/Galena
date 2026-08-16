@@ -9,14 +9,20 @@ from RWDdata import *
 global constructs
 
 def runCommands(commands, inputs = []):
-    user=subprocess.run(["bash", " -c", "source userdata.sh && get_user_name()"])
+    canUser = True
+    try:
+        import userdata
+    except:
+        print("File 'userdata.py' wasn't found, user can't be used!")
+        canUser = False
     os.chdir("constructs")
     for com in commands:
         counter = 1
         for input in inputs:
             com = com.replace(f"${counter}", input)
             counter += 1
-        com = com.replace("$usr", user)
+        if canUser:
+            com = com.replace("$usr", userdata.getUserName())
 
         #subprocess.run(f"bash -c 'echo {com}'", shell=True, check=True)
         subprocess.run(com, shell=True)
