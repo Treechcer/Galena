@@ -16,10 +16,10 @@ while [ $i -le 4 ]; do
     fi
 
     chmod +x ./node$i.sh
-    source "./node$i.sh"
+    . "./node$i.sh"
     runNode="$(get_node_num)"
 
-    if [[ "$runNode" == "1" ]]; then
+    if [ "$runNode" -eq "1" ]; then
         echo "Initing node$i"
         
         echo "What's your username that you want to be logged it. (default Galena)"
@@ -28,20 +28,20 @@ while [ $i -le 4 ]; do
         echo "What's your hostname or IP of node? Hostname is recommended because it usually doesn't change. (default node$i)"
         read hostnameOrIp
 
-        if [[ "$username" == "" ]]; then
+        if [ "$username" -eq "" ]; then
             username="Galena"
         fi
-        if [[ "$hostnameOrIp" == "" ]]; then
+        if [ "$hostnameOrIp" -eq "" ]; then
             hostnameOrIp="node$i"
         fi
         echo "---"
         echo "$username@$hostnameOrIp"
         echo "(username@hostnameOrIp) is this correct? [yes, no]"
         inp=""
-        while [[ true ]]; do
+        while [ true ]; do
             read inp
 
-            if [[ "$inp" == "yes" ]]; then
+            if [ "$inp" == "yes" ]; then
                 ssh-copy-id $username@$hostnameOrIp
                 node="node$i"
                 echo "
@@ -57,7 +57,7 @@ get_username(){
 " >> $node.sh
                 i=$(($i+1))
                 break
-            elif [[ "$inp" == "no" ]]; then
+            elif [ "$inp" -eq "no" ]; then
                 i=$i
                 break
             else 
