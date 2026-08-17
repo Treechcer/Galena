@@ -76,6 +76,7 @@ echo "Executing initialisation of Constructs!"
 if [[ "$node" == "Main" ]]; then
     if [ $(sudo raspi-config nonint get_i2c) -eq 1 ]; then
         sudo raspi-config nonint do_i2c 0
+        sudo usermod -aG i2c $nameSpace
         echo "Enabled I2C"
     fi
 
