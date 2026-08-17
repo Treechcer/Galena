@@ -34,6 +34,7 @@ while [ $i -le 4 ]; do
         if [ "$hostnameOrIp" -eq "" ]; then
             hostnameOrIp="node$i"
         fi
+        
         echo "---"
         echo "$username@$hostnameOrIp"
         echo "(username@hostnameOrIp) is this correct? [yes, no]"
@@ -41,7 +42,7 @@ while [ $i -le 4 ]; do
         while [ true ]; do
             read inp
 
-            if [ "$inp" == "yes" ]; then
+            if [ "$inp" -eq "yes" ]; then
                 ssh-copy-id $username@$hostnameOrIp
                 node="node$i"
                 echo "
