@@ -137,4 +137,12 @@ if [[ "$node" == "Side" ]] && [[ $(hostname) =~ ^node[1-4]$ ]]; then
 
 fi
 
+echo "Removing useless files in the '/home/$nameSpace/ServerData'"
+
+#TODO: test
+
+find /home/$nameSpace/ServerData -name "*.md" -type f -delete
+find /home/$nameSpace/ServerData -name ".git" -type f -delete
+
+
 echo "Next time you log in and out 'Galena' should start working!"
