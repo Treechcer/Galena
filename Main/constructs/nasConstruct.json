@@ -3,7 +3,6 @@
         "type" : "never"
     },
     "initRun" : [
-        "sudo apt update > /dev/null && sudo apt upgrade > /dev/null",
         "sudo apt install -y samba samba-common-bin smbclient cifs-utils > /dev/null",
         "sudo mkdir -p $3 > /dev/null",
         "sudo bash -c \"echo -e '[$1]\ncomment = $2\npublic = yes\nwriteable = yes\nbrowsable = yes\npath = $3\nvalid users = $4' >> /etc/samba/smb.conf\" > /dev/null",

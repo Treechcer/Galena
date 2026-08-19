@@ -57,7 +57,8 @@ def wasInit(cursor, db, name):
         return True
     return False
 
-def doWork(type, constructName):
+def restartConstruct(constructName):
+    #TODO: is this finished? This does nothing, right?
     try:
         with open(os.path.join(os.getcwd(), "constructs", constructName + ".json"), "r") as file:
             try:
@@ -72,12 +73,20 @@ def doWork(type, constructName):
             except:
                 print("Aborting, could not find the file. Check current dir?")
 
+def doWork(type_, constructName):
+    if type_ == "restart":
+        restartConstruct(constructName)
+    elif type_ == "reinit":
+        constructBuilder(type_)
+
 def constructBuilder(arg=""):
     conn, cursor = getDB()
     initDBTables(cursor)
     
     constructs = os.listdir("constructs")
     writeAllConstructs(conn, cursor, constructs)
+
+    subprocess.run("sudo apt update && sudo apt upgrade", shell=True)
 
     for construct in constructs:
         with open(os.path.join(os.getcwd(), "constructs", construct), "r") as file:
@@ -86,7 +95,7 @@ def constructBuilder(arg=""):
             JSONconstruct = json.loads(file.read())
             #print(JSONconstruct)
 
-            if ("initRun" in JSONconstruct and not wasInit(cursor, "constructs", construct)):
+            if ("initRun" in JSONconstruct and (not wasInit(cursor, "constructs", construct) or arg == "reinit")):
                 runCommands(JSONconstruct['initRun'], getArguments(JSONconstruct, "initRun"))
                 writeInit(conn, cursor, "constructs", construct)
 

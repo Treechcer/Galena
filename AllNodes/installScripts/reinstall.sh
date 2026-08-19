@@ -18,5 +18,5 @@ git reset HEAD --hard
 git pull --rebase
 cd ./AllNodes/installScripts/
 
-sudo unis.sh
-sudo init.sh
+sudo ./unis.sh
+sudo ./init.sh
