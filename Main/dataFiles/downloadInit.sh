@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sudo apt install -y git
 
 git clone https://github.com/Treechcer/galena

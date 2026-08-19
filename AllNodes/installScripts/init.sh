@@ -1,5 +1,9 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
+# GOTO AllNodes
+cd ./..
+
 # This is used to init main node? We can maybe use the same for others?
 
 #https://askubuntu.com/a/15856
@@ -143,6 +147,6 @@ echo "Removing useless files in the '/home/$nameSpace/ServerData'"
 
 find /home/$nameSpace/ServerData -name "*.md" -type f -delete
 find /home/$nameSpace/ServerData -name ".git" -type f -delete
-
+sudo rm -rf /home/$nameSpace/ServerData/installScripts
 
 echo "Next time you log in and out 'Galena' should start working!"
