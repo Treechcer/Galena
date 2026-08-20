@@ -8,7 +8,7 @@
 
 import sys
 import os
-from buildConstruct import constructBuilder, doWork
+from AllNodes.galena.buildConstruct import constructBuilder, doWork
 
 def main():
     if len(sys.argv) <= 1:
