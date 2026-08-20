@@ -82,8 +82,9 @@ def doWork(type_, constructName):
 def constructBuilder(arg=""):
     conn, cursor = getDB()
     initDBTables(cursor)
-    
-    constructs = os.listdir(os.path.join("..", "constructs"))
+
+    os.chdir("..")
+    constructs = os.listdir("constructs")
     writeAllConstructs(conn, cursor, constructs)
 
     subprocess.run("sudo apt update && sudo apt upgrade", shell=True)
