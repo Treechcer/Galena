@@ -10,13 +10,13 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-chmod +x init.sh
-chmod +x unis.sh
-
 cd ./../..
 git reset HEAD --hard
 git pull --rebase
 cd ./AllNodes/installScripts/
+
+sudo chmod +x init.sh
+sudo chmod +x unis.sh
 
 sudo ./unis.sh
 sudo ./init.sh
