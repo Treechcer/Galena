@@ -64,11 +64,11 @@ cp -r . /home/$nameSpace/ServerData
 cp -r ./../$node/. /home/$nameSpace/ServerData
 chown -R $nameSpace:$nameSpace /home/$nameSpace/ServerData
 
-touch /home/$nameSpace/ServerData/userdata.py
+touch /home/$nameSpace/ServerData/galena/userdata.py
 echo "#!/bin/bash
 def getUserName():
     return '$nameSpace'
-" >> /home/$nameSpace/ServerData/userdata.py
+" >> /home/$nameSpace/ServerData/galena/userdata.py
 
 sudo apt update && sudo apt upgrade
 
