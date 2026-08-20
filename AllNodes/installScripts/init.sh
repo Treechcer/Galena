@@ -94,7 +94,7 @@ else
 fi
 
 place=$(pwd)
-cd /home/$nameSpace/ServerData
+cd /home/$nameSpace/ServerData/galena
 sudo -u $nameSpace python3 buildConstruct.py
 cd "$place"
 
