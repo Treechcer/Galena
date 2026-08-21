@@ -4,6 +4,23 @@ cd "$(dirname "$0")"
 # GOTO AllNodes
 cd ./..
 
+get_input(){
+    local -n possibilities=$1
+    default=$2
+
+    for input in "${@:3}"; do
+        input="${input,,}"
+        for pos in "${possibilities[@]}"; do
+            if [[ ${pos,,} == "$input" ]]; then
+                echo "$pos"
+                return 0
+            fi
+        done
+    done
+    # $2 => default
+    echo "$default"
+}
+
 # This is used to init main node? We can maybe use the same for others?
 
 #https://askubuntu.com/a/15856
@@ -12,14 +29,24 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+auto=0
+declare -a inputs=("auto" "--auto" "-a")
+input=$(get_input inputs "" "$@")
+if [[ $input != "" ]]; then
+    auto=1
+fi
+
 node="Main"
-input="$1"
+declare -a inputs=("side" "-s" "--side" "main" "-m" "--main")
+input=$(get_input inputs "" "$@")
+
+#echo "$input ||| $auto"
 
 while [[ true ]]; do
-    if [[ "$input" == "Main" ]] || [[ "$input" == "main" ]]; then
+    if [[ "$input" == "Main" ]] || [[ "$input" == "main" ]] || [[ "$input" == "-m" ]] || [[ "$input" == "-main" ]]; then
         node="Main"
         break
-    elif [[ "$input" == "Side" ]] || [[ "$input" == "side" ]]; then
+    elif [[ "$input" == "Side" ]] || [[ "$input" == "side" ]] || [[ "$input" == "-s" ]] || [[ "$input" == "-side" ]]; then
         node="Side"
         break
     fi
@@ -28,6 +55,8 @@ while [[ true ]]; do
     read input
 
 done
+
+exit 0
 
 nameSpace="Galena"
 
