@@ -9,7 +9,7 @@
         "sudo chmod +x ../NodeWorker/remoteInit.sh",
         "sudo chmod +x ../NodeWorker/autoNodeSetup.sh",
         "sudo ../NodeWorker/nodeWorker.sh",
-        "time=10 && echo \"Waiting ${time}s for the nodes to boot\" && for ((i = 0 ; i < $time ; i++ )); do sleep 1; echo \"$(($time-$i))s remaining...\"; done",
+        "time=15 && echo \"Waiting ${time}s for the nodes to boot\" && for ((i = 0 ; i < $time ; i++ )); do sleep 1; echo \"$(($time-$i))s remaining...\"; done",
         "sudo -u $usr ../NodeWorker/remoteInit.sh",
         "sudo -u $usr ../NodeWorker/autoNodeSetup.sh"
     ],

@@ -15,12 +15,14 @@ while [ $i -le 4 ]; do
         #sudo -u Galena ssh $remote bash < ../dataFiles/downloadInit.sh
 
         #sudo -u Galena ssh $remote "sudo bash -c 'echo \"PasswordAuthentication no\n PubkeyAuthentication yes\"  >> /etc/ssh/sshd_config && sudo systemctl restart ssh'"
-
-        sudo -u Galena ssh $remote bahs < ../dataFiles/addKeyAuth.sh
+        
+        sudo -u Galena ssh-copy-id -i ~/.ssh/id_rsa.pub node@node1.local
+        sudo -u Galena ssh $remote bash < ../dataFiles/addKeyAuth.sh
 
         sudo -u Galena ssh $remote touch install.sh
         sudo -u Galena ssh $remote "echo '#!/bin/bash
 sudo apt install -y git
+rm -rf galena
 git clone https://github.com/Treechcer/galena
 cd galena/AllNodes
 chmod +x init.sh
