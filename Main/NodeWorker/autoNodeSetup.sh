@@ -21,9 +21,9 @@ git clone https://github.com/Treechcer/galena
 cd galena/AllNodes
 chmod +x init.sh
 ./init.sh Side -n$i' >> install.sh"
-    sudo -u Galena ssh $remote chmod +x install.sh
-    sudo -u Galena ssh $remote sudo ./install.sh
-    sudo -u Galena ssh $remote sudo rm ./install.sh
+        sudo -u Galena ssh $remote chmod +x install.sh
+        sudo -u Galena ssh $remote sudo ./install.sh
+        sudo -u Galena ssh $remote sudo rm ./install.sh
 
     fi
     i=$(($i+1))

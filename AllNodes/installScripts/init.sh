@@ -44,10 +44,6 @@ if [[ $input != "" ]]; then
     fi
 fi
 
-echo $hostnamePossibility
-
-exit
-
 node="Main"
 declare -a inputs=("side" "-s" "--side" "main" "-m" "--main")
 input=$(get_input inputs "" "$@")
