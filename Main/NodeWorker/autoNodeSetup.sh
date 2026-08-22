@@ -14,14 +14,17 @@ while [ $i -le 4 ]; do
 
         #sudo -u Galena ssh $remote bash < ../dataFiles/downloadInit.sh
 
-        sudo -u Galena ssh $remote bash < "#!/bin/bash
-
+        sudo -u Galena ssh $remote touch install.sh
+        sudo -u Galena ssh $remote "echo '#!/bin/bash
 sudo apt install -y git
-
 git clone https://github.com/Treechcer/galena
 cd galena/AllNodes
 chmod +x init.sh
-./init.sh Side -n$i"
+./init.sh Side -n$i' >> install.sh"
+    sudo -u Galena ssh $remote chmod +x install.sh
+    sudo -u Galena ssh $remote sudo ./install.sh
+    sudo -u Galena ssh $remote sudo rm ./install.sh
+
     fi
     i=$(($i+1))
 done 
