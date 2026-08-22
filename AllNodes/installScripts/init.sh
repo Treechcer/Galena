@@ -64,8 +64,6 @@ while [[ true ]]; do
 
 done
 
-exit 0
-
 nameSpace="Galena"
 
 echo "This will create you a new user called Galena"
