@@ -29,12 +29,24 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-auto=0
-declare -a inputs=("auto" "--auto" "-a")
+hostnamePossibility=""
+declare -a inputs=("-n1" "-n2" "-n3" "-n4")
 input=$(get_input inputs "" "$@")
 if [[ $input != "" ]]; then
-    auto=1
+    if [[ $input == "-n1" ]]; then
+        hostnamePossibility="node1"
+    elif [[ $input == "-n2" ]]; then
+        hostnamePossibility="node2"
+    elif [[ $input == "-n3" ]]; then
+        hostnamePossibility="node3"
+    elif [[ $input == "-n4" ]]; then
+        hostnamePossibility="node4"
+    fi
 fi
+
+echo $hostnamePossibility
+
+exit
 
 node="Main"
 declare -a inputs=("side" "-s" "--side" "main" "-m" "--main")
@@ -154,20 +166,23 @@ fi
 
 if [[ "$node" == "Side" ]] && [[ $(hostname) =~ ^node[1-4]$ ]]; then
     inp=""
-    while [ true ]; do
-        echo "Do you want to make your hostname 'node1-4'? (Preffered to have hostnames of node1-4 for nodes by how it's in the slots) [1-4 or no]" 
-        read inp
+    if [[ "$hostnamePossibility" != "" ]]; then
+        sudo hostname "$hostnamePossibility"
+    else
+        while [ true ]; do
+            echo "Do you want to make your hostname 'node1-4'? (Preffered to have hostnames of node1-4 for nodes by how it's in the slots) [1-4 or no]" 
+            read inp
 
-        if [[ "$inp" =~ [1-4] ]]; then
-            sudo hostname "node$inp"
-        elif [ "$inp" == "no" ]; then
-            break
-        else
-            echo "You have to say 1, 2, 3, 4 or no"
-        fi
+            if [[ "$inp" =~ [1-4] ]]; then
+                sudo hostname "node$inp"
+            elif [ "$inp" == "no" ]; then
+                break
+            else
+                echo "You have to say 1, 2, 3, 4 or no"
+            fi
 
-    done
-
+        done
+    fi
 fi
 
 echo "Removing useless files in the '/home/$nameSpace/ServerData'"
