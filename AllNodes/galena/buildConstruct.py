@@ -25,7 +25,7 @@ def runCommands(commands, inputs = []):
             com = com.replace("$usr", userdata.getUserName())
 
         #subprocess.run(f"bash -c 'echo {com}'", shell=True, check=True)
-        subprocess.run(com, shell=True)
+        subprocess.run(com, shell=True, executable="/bin/bash")
 
     os.chdir("..")
 
