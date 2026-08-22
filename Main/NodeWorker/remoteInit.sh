@@ -24,18 +24,21 @@ while [ $i -le 4 ]; do
     if [[ "$runNode" == "1" ]]; then
         echo "Initing node$i"
         
-        echo "What's your username that you want to be logged it. (default Galena)"
+        echo "What's your username that you want to be logged it. (default node)"
         read username
 
         echo "What's your hostname or IP of node? Hostname is recommended because it usually doesn't change. (default node$i)"
         read hostnameOrIp
 
         if [[ "$username" == "" ]]; then
-            username="Galena"
+            username="node"
         fi
         if [[ "$hostnameOrIp" == "" ]]; then
             hostnameOrIp="node$i"
         fi
+        #if [[ ! "$hostnameOrIp" =~ "^.*\.local$" ]]; then
+            
+        #fi
         
         echo "---"
         echo "$username@$hostnameOrIp"
