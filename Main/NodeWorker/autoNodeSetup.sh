@@ -14,6 +14,10 @@ while [ $i -le 4 ]; do
 
         #sudo -u Galena ssh $remote bash < ../dataFiles/downloadInit.sh
 
+        #sudo -u Galena ssh $remote "sudo bash -c 'echo \"PasswordAuthentication no\n PubkeyAuthentication yes\"  >> /etc/ssh/sshd_config && sudo systemctl restart ssh'"
+
+        sudo -u Galena ssh $remote bahs < ../dataFiles/addKeyAuth.sh
+
         sudo -u Galena ssh $remote touch install.sh
         sudo -u Galena ssh $remote "echo '#!/bin/bash
 sudo apt install -y git
