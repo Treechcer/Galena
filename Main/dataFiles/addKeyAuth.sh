@@ -5,7 +5,6 @@ if [ ! -f "/etc/ssh/sshd_config" ]; then
 fi
 
 sed 's/#PasswordAuthentication no/PasswordAuthentication no' /etc/ssh/sshd_config
-sed 's/PasswordAuthentication no/PasswordAuthentication no' /etc/ssh/sshd_config
 sed 's/#PasswordAuthentication yes/PasswordAuthentication no' /etc/ssh/sshd_config
 sed 's/PasswordAuthentication yes/PasswordAuthentication no' /etc/ssh/sshd_config
 

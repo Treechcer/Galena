@@ -48,7 +48,8 @@ while [ $i -le 4 ]; do
             read inp
 
             if [[ "$inp" == "yes" ]]; then
-                ssh-copy-id $username@$hostnameOrIp
+                #This can be moved
+                #ssh-copy-id $username@$hostnameOrIp
                 node="node$i"
                 echo "
 get_hostname(){
