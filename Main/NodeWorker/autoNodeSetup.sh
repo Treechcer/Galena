@@ -8,6 +8,10 @@ while [ $i -le 4 ]; do
         chmod +x ./node$i.sh
         source "./node$i.sh"
 
+        if [[ $(get_node_num) != "1" ]]; then
+            continue;
+        fi
+
         remote="$(get_username)@$(get_hostname)"
 
         #This might work?
