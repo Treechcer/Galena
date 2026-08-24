@@ -1,4 +1,6 @@
-node@node1's password: 
+# output
+
+node@node1's password:
 bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory
 
 Number of key(s) added: 1
