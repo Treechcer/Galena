@@ -29,6 +29,14 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+auto="0"
+declare -a inputs=("-a" "--auto" "a" "auto")
+input=$(get_input inputs "" "$@")
+
+if [[ "$input" != "" ]]; then
+    auto="1"
+fi
+ 
 hostnamePossibility=""
 declare -a inputs=("-n1" "-n2" "-n3" "-n4")
 input=$(get_input inputs "" "$@")
@@ -47,8 +55,6 @@ fi
 node="Main"
 declare -a inputs=("side" "-s" "--side" "main" "-m" "--main")
 input=$(get_input inputs "" "$@")
-
-#echo "$input ||| $auto"
 
 while [[ true ]]; do
     if [[ "$input" == "Main" ]] || [[ "$input" == "main" ]] || [[ "$input" == "-m" ]] || [[ "$input" == "-main" ]]; then
@@ -109,6 +115,11 @@ sudo apt update && sudo apt upgrade
 
 echo "Downlaoding dependencies (might ask for some configuration, not fully automatic!)"
 sudo apt install -y python3 python3-pip sqlite3
+
+if [[ "$auto" != "1" ]]; then
+    echo "Do you want to install constructs (yes, no)"
+    python3 constructAsk.py "/home/$nameSpace/ServerData/constructs"
+fi
 
 echo "Executing initialisation of Constructs!"
 

@@ -1,0 +1,17 @@
+import sys
+import os
+
+if os.path.exists(sys.argv[1]):
+    constructs = os.listdir(sys.argv[1])
+
+    cc = 0
+    while cc < len(constructs):
+        inp = input("Do you want to install construct: " + constructs[cc]).lower() + " [yes, no]"
+
+        if inp == "yes":
+            cc += 1
+        elif inp == "no":
+            cc += 1
+            os.remove(os.path.join(sys.argv[1], constructs[cc]))
+        else:
+            print("You have to say yes or no")
