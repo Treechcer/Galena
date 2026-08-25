@@ -4,6 +4,21 @@ cd "$(dirname "$0")"
 # GOTO AllNodes
 cd ./..
 
+get_yes_or_no(){
+    while true; do
+        read a
+        if [[ $a == "yes" ]]; then
+            echo "1"
+            return 0
+        elif [[ $a == "no" ]]; then
+            echo "0"
+            return 0
+        else
+            echo "Try again [yes, no]"
+        fi
+    done
+}
+
 get_input(){
     local -n possibilities=$1
     default=$2
@@ -113,12 +128,14 @@ def getUserName():
 
 sudo apt update && sudo apt upgrade
 
-echo "Downlaoding dependencies (might ask for some configuration, not fully automatic!)"
+echo "Downloading dependencies (might ask for some configuration, not fully automatic!)"
 sudo apt install -y python3 python3-pip sqlite3
 
-if [[ "$auto" != "1" ]]; then
-    echo "Do you want to install constructs (yes, no)"
-    python3 constructAsk.py "/home/$nameSpace/ServerData/constructs"
+if [[ "$auto" == "0" ]]; then
+    echo "Do you want to set up which scripts you want ot install [yes, no]"
+    if [[ $(get_yes_or_no) == 1 ]]; then
+        python3 installScripts/constructAsk.py "/home/$nameSpace/ServerData/constructs"
+    fi
 fi
 
 echo "Executing initialisation of Constructs!"
