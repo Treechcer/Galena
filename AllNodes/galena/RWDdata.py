@@ -1,3 +1,4 @@
+from os import EX_OK
 import os
 import getpass
 import sqlite3
@@ -56,7 +57,20 @@ def getDB():
     dbFile = getDBFile()
 
     #init DB
-    conn = sqlite3.connect(dbFile, timeout=30)
+    again = True
+    retryNum = 0
+    maxRetry = 5
+    while again:
+        try:
+            conn = sqlite3.connect(dbFile, timeout=30)
+            again = False
+        except:
+            if retryNum <= maxRetry:
+                retryNum += 1
+                time.sleep(5)
+            else:
+                exit(1)
+
     cursor = conn.cursor()
 
     return conn, cursor
