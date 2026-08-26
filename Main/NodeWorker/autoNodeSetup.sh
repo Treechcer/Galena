@@ -9,6 +9,7 @@ while [ $i -le 4 ]; do
         source "./node$i.sh"
 
         if [[ $(get_node_num) != "1" ]]; then
+            i=$(($i+1))
             continue;
         fi
 
@@ -39,5 +40,6 @@ while [ $i -le 4 ]; do
         #sudo -u Galena ssh $remote sudo rm ./install.sh
 
     fi
+
     i=$(($i+1))
 done 
