@@ -11,7 +11,7 @@ if os.path.exists(sys.argv[1]):
         if inp == "yes":
             cc += 1
         elif inp == "no":
-            cc += 1
             os.remove(os.path.join(sys.argv[1], constructs[cc]))
+            cc += 1
         else:
             print("You have to say yes or no")
